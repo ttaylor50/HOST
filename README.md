@@ -1,4 +1,5 @@
-# HopeAI Assistant (Simple)
+# Hopeo
+Assistant (Simple)
 
 A minimal full‑stack chatbot using FastAPI + OpenAI on the backend and React (Vite) on the frontend. The assistant follows this prompt:
 
