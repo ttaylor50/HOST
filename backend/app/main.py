@@ -72,8 +72,10 @@ app.add_middleware(
     expose_headers=["*"]
 )
 
-from . import auth
+from . import auth, search_api, goals_api
 app.include_router(auth.router, prefix="/auth", tags=["authentication"])
+app.include_router(search_api.router, tags=["doctors"])
+app.include_router(goals_api.router, tags=["goals"])
 
 @app.get("/")
 async def root():
@@ -89,6 +91,10 @@ def get_client():
         raise HTTPException(status_code=503, detail='OPENAI_API_KEY is not set on the server')
     return AsyncOpenAI(api_key=key)
 
+if __name__ == "__main__":
+    import uvicorn
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run("app.main:app", host="0.0.0.0", port=port, reload=False)
 
 @app.post('/chat')
 async def chat_endpoint(chat_in: ChatIn):

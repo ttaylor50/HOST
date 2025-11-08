@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Chatbot from './Chatbot';
 import CalendarGrid from './CalendarGrid';
+import DoctorSearch from './DoctorSearch';
+import GoalsTracker from './GoalsTracker';
 import './Dashboard.css';
 
 const Dashboard = () => {
@@ -39,11 +41,20 @@ const Dashboard = () => {
         <aside className="side-tabs">
           <button onClick={() => setTab('tracker')} className={tab === 'tracker' ? 'active' : ''}>Tracker</button>
           <button onClick={() => setTab('chatbot')} className={tab === 'chatbot' ? 'active' : ''}>Chatbot</button>
+          <button onClick={() => setTab('doctors')} className={tab === 'doctors' ? 'active' : ''}>Find Doctors</button>
+          <button onClick={() => setTab('goals')} className={tab === 'goals' ? 'active' : ''}>Goals</button>
         </aside>
 
         <main className="main-card">
-          {tab === 'tracker' && <CalendarGrid dates={dates} />}
+          {tab === 'tracker' && (
+            <div>
+              <CalendarGrid dates={dates} />
+              <GoalsTracker userId={1} /> {/* TODO: Replace with actual user ID */}
+            </div>
+          )}
           {tab === 'chatbot' && <Chatbot />}
+          {tab === 'doctors' && <DoctorSearch />}
+          {tab === 'goals' && <GoalsTracker userId={1} />} {/* TODO: Replace with actual user ID */}
         </main>
       </div>
 
