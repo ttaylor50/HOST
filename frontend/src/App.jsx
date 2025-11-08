@@ -1,18 +1,21 @@
-import Chatbot from '@/components/Chatbot';
-import logo from '@/assets/images/logo.svg';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Chatbot from './components/Chatbot';
+import Login from './components/Login';
+import Signup from './components/Signup';
+import Register from './components/Register';
+import Dashboard from './components/Dashboard';
 
 function App() {
-
   return (
-    <div className='flex flex-col min-h-full w-full max-w-3xl mx-auto px-4'>
-      <header className='sticky top-0 shrink-0 z-20 bg-white'>
-        <div className='flex flex-col h-full w-full gap-1 pt-4 pb-2'>
-          
-          <h1 className='font-urbanist text-[1.65rem] font-semibold'>HopeAI Assistant</h1>
-        </div>
-      </header>
-      <Chatbot />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+    </Router>
   );
 }
 

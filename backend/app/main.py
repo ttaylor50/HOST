@@ -65,12 +65,19 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=['*'],
+    allow_origins=["*"],  # Allow all origins in development
     allow_credentials=True,
-    allow_methods=['*'],
-    allow_headers=['*'],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],  # Explicitly include OPTIONS
+    allow_headers=["*"],
+    expose_headers=["*"]
 )
 
+from . import auth
+app.include_router(auth.router, prefix="/auth", tags=["authentication"])
+
+@app.get("/")
+async def root():
+    return {"status": "ok", "message": "API is running"}
 
 class ChatIn(BaseModel):
     message: str
